@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><%= @restaurant.name %></h1>
+      <div><strong>Address:</strong> <%= @restaurant.address %></div>
+      <div><strong>Phone:</strong> <%= @restaurant.phone_number %></div>
+      <div><strong>Category:</strong> <%= @restaurant.category %></div>
+  </div>
+
+  <div class="list-group">
+        <% @restaurant.reviews.each do |review| %>
+          <li class="list-group-item">
+            <div><%= review.rating %></div>
+            <div><%= review.content %></div>
+          </li>
+        <% end %>
+      </div>
+
+    <div>
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.input :rating, collection: 0..5 %>
+        <%= f.input :content%>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <hr>
+  <%= link_to restaurants_path do %>
+    <i class="fa-solid fa-arrow-rotate-left"></i> Back to list
+  <% end %>
+
+</div>
